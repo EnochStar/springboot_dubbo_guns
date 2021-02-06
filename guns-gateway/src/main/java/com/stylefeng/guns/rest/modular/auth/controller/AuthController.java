@@ -33,7 +33,6 @@ public class AuthController {
 
     @RequestMapping(value = "${jwt.auth-path}")
     public ResponseVO createAuthenticationToken(AuthRequest authRequest) {
-        userAPI.login(authRequest.getUserName(),authRequest.getPassword());
         boolean validate = true;
         // 去掉guns携带的用户名密码验证机制，使用自己的
         int uid = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
@@ -45,7 +44,6 @@ public class AuthController {
             final String randomKey = jwtTokenUtil.getRandomKey();
             final String token = jwtTokenUtil.generateToken(""+uid, randomKey);
             // 返回值
-            // return ResponseEntity.ok(new AuthResponse(token, randomKey));
             return ResponseVO.success(new AuthResponse(token,randomKey));
         } else {
             return ResponseVO.serviceFail("用户名或密码错误");
