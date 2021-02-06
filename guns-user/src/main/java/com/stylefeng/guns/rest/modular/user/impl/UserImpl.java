@@ -11,6 +11,8 @@ import com.stylefeng.guns.rest.common.persistence.model.MoocUserT;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -82,11 +84,53 @@ public class UserImpl implements UserAPI {
 
     @Override
     public UserInfoModel getUserInfo(int uuid) {
-        return null;
+        MoocUserT moocUserT = moocUserTMapper.selectById(uuid);
+        return convertFromUserDOToUserVO(moocUserT);
     }
 
     @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
-        return null;
+        MoocUserT moocUserT = new MoocUserT();
+        moocUserT.setUuid(userInfoModel.getUuid());
+        moocUserT.setUserSex(userInfoModel.getSex());
+        moocUserT.setNickName(userInfoModel.getNickname());
+        moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
+        moocUserT.setBirthday(userInfoModel.getBirthday());
+        moocUserT.setBeginTime(time2Date(userInfoModel.getCreateTime()));
+        moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
+        moocUserT.setEmail(userInfoModel.getEmail());
+        moocUserT.setAddress(userInfoModel.getAddress());
+        moocUserT.setUserPhone(userInfoModel.getPhone());
+        moocUserT.setUpdateTime(time2Date(System.currentTimeMillis()));
+        moocUserT.setBiography(userInfoModel.getBiography());
+
+        Integer result = moocUserTMapper.insert(moocUserT);
+        if (result > 0) {
+            return getUserInfo(moocUserT.getUuid());
+        }else{
+            return userInfoModel;
+        }
+    }
+
+    public UserInfoModel convertFromUserDOToUserVO (MoocUserT moocUserT) {
+        UserInfoModel userInfoModel = new UserInfoModel();
+        userInfoModel.setUsername(moocUserT.getUserName());
+        userInfoModel.setUpdateTime(moocUserT.getUpdateTime().getTime());
+        userInfoModel.setSex(moocUserT.getUserSex());
+        userInfoModel.setPhone(moocUserT.getUserPhone());
+        userInfoModel.setNickname(moocUserT.getNickName());
+        userInfoModel.setLifeState("" +moocUserT.getLifeState());
+        userInfoModel.setHeadAddress(moocUserT.getHeadUrl());
+        userInfoModel.setEmail(moocUserT.getEmail());
+        userInfoModel.setCreateTime(userInfoModel.getCreateTime());
+        userInfoModel.setBirthday(userInfoModel.getBirthday());
+        userInfoModel.setBiography(userInfoModel.getBiography());
+        userInfoModel.setAddress(userInfoModel.getAddress());
+        return userInfoModel;
+    }
+
+    private Date time2Date(long time) {
+        Date date = new Date(time);
+        return date;
     }
 }
