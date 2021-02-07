@@ -27,6 +27,8 @@ public class UserController {
                 || userModel.getPassword() == null || userModel.getPassword().trim().length() == 0 ) {
             return ResponseVO.serviceFail("用户名或密码不能为空");
         }
+        boolean flag = userAPI.checkUsername(userModel.getUsername());
+        if (!flag) return ResponseVO.serviceFail("用户名已存在");
         boolean isSuccess = userAPI.registry(userModel);
         if (isSuccess) {
             return ResponseVO.success("注册成功");

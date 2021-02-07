@@ -10,8 +10,21 @@ import java.util.Date;
  * @description: 用户信息和相应的业务操作对应的类
  * @date 2021/2/5 20:58
  */
-public class UserInfoModel implements Serializable {
+public class UserInfoModel implements Serializable{
     private Integer uuid;
+    private String username;
+    private String nickname;
+    private String email;
+    private String phone;
+    private int sex;
+    private String birthday;
+    private String lifeState;
+    private String biography;
+    private String address;
+    private String headAddress;
+    private long beginTime;
+    private long updateTime;
+
 
     public Integer getUuid() {
         return uuid;
@@ -20,19 +33,6 @@ public class UserInfoModel implements Serializable {
     public void setUuid(Integer uuid) {
         this.uuid = uuid;
     }
-
-    private String username;
-    private String nickname;
-    private String email;
-    private String phone;
-    private Integer sex;
-    private String birthday;
-    private String lifeState;
-    private String biography;
-    private String address;
-    private String headAddress;
-    private Long createTime;
-    private Long updateTime;
 
     public String getUsername() {
         return username;
@@ -66,11 +66,11 @@ public class UserInfoModel implements Serializable {
         this.phone = phone;
     }
 
-    public Integer getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -114,19 +114,19 @@ public class UserInfoModel implements Serializable {
         this.headAddress = headAddress;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public long getBeginTime() {
+        return beginTime;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setBeginTime(long beginTime) {
+        this.beginTime = beginTime;
     }
 
-    public Long getUpdateTime() {
+    public long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
 }

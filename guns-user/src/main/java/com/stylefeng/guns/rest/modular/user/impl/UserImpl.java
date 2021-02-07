@@ -90,42 +90,51 @@ public class UserImpl implements UserAPI {
 
     @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
+        // 将传入的参数转换为DO 【MoocUserT】
         MoocUserT moocUserT = new MoocUserT();
         moocUserT.setUuid(userInfoModel.getUuid());
-        moocUserT.setUserSex(userInfoModel.getSex());
         moocUserT.setNickName(userInfoModel.getNickname());
         moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
         moocUserT.setBirthday(userInfoModel.getBirthday());
-        moocUserT.setBeginTime(time2Date(userInfoModel.getCreateTime()));
+        System.out.println("=====>"+userInfoModel.getBiography());
+        moocUserT.setBiography(userInfoModel.getBiography());
+        moocUserT.setBeginTime(null);
         moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
         moocUserT.setEmail(userInfoModel.getEmail());
         moocUserT.setAddress(userInfoModel.getAddress());
         moocUserT.setUserPhone(userInfoModel.getPhone());
-        moocUserT.setUpdateTime(time2Date(System.currentTimeMillis()));
-        moocUserT.setBiography(userInfoModel.getBiography());
+        moocUserT.setUserSex(userInfoModel.getSex());
+        moocUserT.setUpdateTime(null);
 
-        Integer result = moocUserTMapper.insert(moocUserT);
-        if (result > 0) {
-            return getUserInfo(moocUserT.getUuid());
+        // DO存入数据库
+        Integer integer = moocUserTMapper.updateById(moocUserT);
+        if(integer>0){
+            // 将数据从数据库中读取出来
+            UserInfoModel userInfo = getUserInfo(moocUserT.getUuid());
+            // 将结果返回给前端
+            return userInfo;
         }else{
-            return userInfoModel;
+            return null;
         }
     }
 
     public UserInfoModel convertFromUserDOToUserVO (MoocUserT moocUserT) {
         UserInfoModel userInfoModel = new UserInfoModel();
-        userInfoModel.setUsername(moocUserT.getUserName());
-        userInfoModel.setUpdateTime(moocUserT.getUpdateTime().getTime());
-        userInfoModel.setSex(moocUserT.getUserSex());
-        userInfoModel.setPhone(moocUserT.getUserPhone());
-        userInfoModel.setNickname(moocUserT.getNickName());
-        userInfoModel.setLifeState("" +moocUserT.getLifeState());
+
+        userInfoModel.setUuid(moocUserT.getUuid());
         userInfoModel.setHeadAddress(moocUserT.getHeadUrl());
+        userInfoModel.setPhone(moocUserT.getUserPhone());
+        userInfoModel.setUpdateTime(moocUserT.getUpdateTime().getTime());
         userInfoModel.setEmail(moocUserT.getEmail());
-        userInfoModel.setCreateTime(userInfoModel.getCreateTime());
-        userInfoModel.setBirthday(userInfoModel.getBirthday());
-        userInfoModel.setBiography(userInfoModel.getBiography());
-        userInfoModel.setAddress(userInfoModel.getAddress());
+        userInfoModel.setUsername(moocUserT.getUserName());
+        userInfoModel.setNickname(moocUserT.getNickName());
+        userInfoModel.setLifeState(""+moocUserT.getLifeState());
+        userInfoModel.setBirthday(moocUserT.getBirthday());
+        userInfoModel.setAddress(moocUserT.getAddress());
+        userInfoModel.setSex(moocUserT.getUserSex());
+        userInfoModel.setBeginTime(moocUserT.getBeginTime().getTime());
+        userInfoModel.setBiography(moocUserT.getBiography());
+
         return userInfoModel;
     }
 
