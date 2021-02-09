@@ -117,16 +117,43 @@ public class DefaultFilmService implements FilmServiceApi {
 
     @Override
     public List<FilmInfo> getBoxRanking() {
-        return null;
+        // 条件 -》 正在上映的，票房前十名
+        EntityWrapper<MoocFilmT> filmTEntityWrapper = new EntityWrapper<>();
+        // 说明是热映影片
+        filmTEntityWrapper.eq("film_status",1);
+
+        Page<MoocFilmT> page = new Page<>(1,10,"film_box_office");
+
+        List<MoocFilmT> moocFilmTS = moocFilmTMapper.selectPage(page,filmTEntityWrapper);
+        List<FilmInfo> filmInfos = getFilmInfos(moocFilmTS);
+        return filmInfos;
     }
 
     @Override
     public List<FilmInfo> getExpectRanking() {
-        return null;
+        // 即将上映的 预售前十名
+        EntityWrapper<MoocFilmT> filmTEntityWrapper = new EntityWrapper<>();
+        // 说明是热映影片
+        filmTEntityWrapper.eq("film_status",2);
+
+        Page<MoocFilmT> page = new Page<>(1,10,"film_preSaleNum");
+
+        List<MoocFilmT> moocFilmTS = moocFilmTMapper.selectPage(page,filmTEntityWrapper);
+        List<FilmInfo> filmInfos = getFilmInfos(moocFilmTS);
+        return filmInfos;
     }
 
     @Override
     public List<FilmInfo> getTop() {
-        return null;
+        // 正在上映的 评分前十
+        EntityWrapper<MoocFilmT> filmTEntityWrapper = new EntityWrapper<>();
+        // 说明是热映影片
+        filmTEntityWrapper.eq("film_status",1);
+
+        Page<MoocFilmT> page = new Page<>(1,10,"film_score");
+
+        List<MoocFilmT> moocFilmTS = moocFilmTMapper.selectPage(page,filmTEntityWrapper);
+        List<FilmInfo> filmInfos = getFilmInfos(moocFilmTS);
+        return filmInfos;
     }
 }
