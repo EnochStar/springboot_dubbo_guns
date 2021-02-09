@@ -1,6 +1,8 @@
-package com.stylefeng.guns.rest.modular.film.vo;
+package com.stylefeng.guns.api.film.vo;
 
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @author EnochStar
@@ -10,7 +12,7 @@ import lombok.Data;
  * @date 2021/2/9 20:02
  */
 @Data
-public class FilmInfo {
+public class FilmInfo implements Serializable {
     private String filmId;
     private int filmType;
     private String imgAddress;
