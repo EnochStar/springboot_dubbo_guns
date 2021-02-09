@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface FilmServiceApi {
     // 获得banners
-    BannerVO getBanners();
+    List<BannerVO> getBanners();
 
     // 获取热映影片
     FilmVO getHotFilms(boolean isLimit,int num);
