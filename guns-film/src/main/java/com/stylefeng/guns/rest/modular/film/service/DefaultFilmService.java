@@ -66,6 +66,7 @@ public class DefaultFilmService implements FilmServiceApi {
             // 组织filmInfos
             filmInfos = getFilmInfos(moocFilmTS);
             filmVO.setFilmNum(moocFilmTS.size());
+            filmVO.setFilmInfos(filmInfos);
         }else{
 
         }
@@ -108,6 +109,7 @@ public class DefaultFilmService implements FilmServiceApi {
             // 组织filmInfos
             filmInfos = getFilmInfos(moocFilmTS);
             filmVO.setFilmNum(moocFilmTS.size());
+            filmVO.setFilmInfos(filmInfos);
         }else{
 
         }
