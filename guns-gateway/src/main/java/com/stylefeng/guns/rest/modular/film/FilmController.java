@@ -7,6 +7,7 @@ import com.stylefeng.guns.api.film.vo.SourceVO;
 import com.stylefeng.guns.api.film.vo.YearVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmConditionVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVO;
+import com.stylefeng.guns.rest.modular.film.vo.FilmRequestVO;
 import com.stylefeng.guns.rest.modular.vo.ResponseVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -151,6 +152,19 @@ public class FilmController {
         filmConditionVO.setYearInfo(yearResult);
 
         return ResponseVO.success(filmConditionVO);
+    }
+
+    @GetMapping("getFilms")
+    public ResponseVO getFilms(FilmRequestVO filmRequestVO) {
+        // 根据showType判断影片查询类型
+
+        // 根据sortID条件查询
+
+        // 添加各种条件查询
+
+        // 判断当前是第几页
+
+        return null;
     }
 
 }
