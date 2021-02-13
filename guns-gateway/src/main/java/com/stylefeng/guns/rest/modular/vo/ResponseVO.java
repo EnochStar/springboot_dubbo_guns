@@ -1,5 +1,7 @@
 package com.stylefeng.guns.rest.modular.vo;
 
+import lombok.Data;
+
 /**
  * @author EnochStar
  * @title: ResponseVO
@@ -7,13 +9,24 @@ package com.stylefeng.guns.rest.modular.vo;
  * @description: TODO
  * @date 2021/2/5 21:19
  */
+@Data
 public class ResponseVO<M> {
     private Integer status;
     private String msg;
     // 返回数据实体
     private M data;
 
+    private String imgPre;
+
     public ResponseVO() {
+    }
+
+    public static <M> ResponseVO success(String imgPre,M m) {
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setStatus(0);
+        responseVO.setData(m);
+        responseVO.setImgPre(imgPre);
+        return responseVO;
     }
 
     public static <M> ResponseVO success(M m) {
@@ -38,28 +51,5 @@ public class ResponseVO<M> {
         responseVO.setStatus(999);
         responseVO.setMsg(msg);
         return responseVO;
-    }
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public M getData() {
-        return data;
-    }
-
-    public void setData(M data) {
-        this.data = data;
     }
 }

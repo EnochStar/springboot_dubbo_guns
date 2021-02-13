@@ -29,23 +29,25 @@ public class FilmController {
     @Reference(interfaceClass = FilmServiceApi.class)
     private FilmServiceApi filmServiceApi;
 
+    private static final String IMG_PRE = "http://img.meetingshop.cn/";
+
     // 获取首页信息接口
     @GetMapping("getIndex")
     public ResponseVO getIndex() {
         FilmIndexVO filmIndexVO = new FilmIndexVO();
         // 获取banner信息
-        filmServiceApi.getBanners();
+        filmIndexVO.setBanners(filmServiceApi.getBanners());
         // 获取热映电影
-        filmServiceApi.getHotFilms(true,8);
+        filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true,8));
         // 即将上映的film
-        filmServiceApi.getSoonFilms(true,8);
+        filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true,8));
         // 票房排行榜
-        filmServiceApi.getBoxRanking();
+        filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking());
         // 人气榜
-        filmServiceApi.getExpectRanking();
+        filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking());
         // 前一百
-        filmServiceApi.getTop();
-        return ResponseVO.success(filmIndexVO);
+        filmIndexVO.setTop100(filmServiceApi.getTop());
+        return ResponseVO.success(IMG_PRE,filmIndexVO);
     }
 
 }
