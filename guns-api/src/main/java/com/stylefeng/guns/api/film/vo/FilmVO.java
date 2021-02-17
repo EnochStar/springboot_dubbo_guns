@@ -16,4 +16,6 @@ import java.util.List;
 public class FilmVO implements Serializable {
     private int filmNum;
     private List<FilmInfo> filmInfos;
+    private int nowPage;
+    private int totalPage;
 }
