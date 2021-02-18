@@ -1,5 +1,7 @@
 package com.stylefeng.guns.api.film.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @description: TODO
  * @date 2021/2/17 20:37
  */
+@Data
 public class FilmDetailVO implements Serializable {
     private String filmId;
     private String filmName;
