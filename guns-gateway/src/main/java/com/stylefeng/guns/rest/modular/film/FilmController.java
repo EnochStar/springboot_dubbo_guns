@@ -10,10 +10,7 @@ import com.stylefeng.guns.rest.modular.film.vo.FilmConditionVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmRequestVO;
 import com.stylefeng.guns.rest.modular.vo.ResponseVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,6 +191,17 @@ public class FilmController {
         return ResponseVO.success(
                 filmVO.getNowPage(),filmVO.getTotalPage(),
                 img_pre,filmVO.getFilmInfos());
+    }
+
+    @GetMapping("films/{searchParam}")
+    public ResponseVO films(@PathVariable("searchParam") String searchParam,
+                            int searchType) {
+        // 根据searchType判断查询类型
+
+        // 不同的查询类型，传入的条件有所不同
+
+        // 查询影片的详细信息 -》 Dubbo异步获取
+        return null;
     }
 
 }
