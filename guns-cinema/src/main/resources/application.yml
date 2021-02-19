@@ -1,0 +1,47 @@
+rest:
+  auth-open: false
+  sign-open: false
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  auth-path: auth
+  md5-key: randomKey
+
+server:
+  port: 8085 #项目端口
+
+mybatis-plus:
+  mapper-locations: classpath*:com/stylefeng/guns/rest/**/mapping/*.xml
+  typeAliasesPackage: com.stylefeng.guns.rest.common.persistence.model
+  global-config:
+    id-type: 0
+    db-column-underline: false
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: true
+    lazyLoadingEnabled: true
+    multipleResultSetsEnabled: true
+
+spring:
+  application:
+    name: meeting-user
+  dubbo:
+    server: true
+    registry: zookeeper://localhost:2181
+    protocol:
+      name: dubbo
+      port: 20883
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+      username: root
+      password: 231860
+      filters: log4j,wall,mergeStat
+
+logging:
+  level.root: info
+  level.com.stylefeng: debug
+  path: logs/
+  file: guns-cinema.log
