@@ -1,6 +1,8 @@
 package com.stylefeng.guns.rest.modular.film.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.stylefeng.guns.api.film.FilmAsyncServiceApi;
+import com.stylefeng.guns.api.film.FilmServiceApi;
 import com.stylefeng.guns.api.film.vo.ActorVO;
 import com.stylefeng.guns.api.film.vo.FilmDescVO;
 import com.stylefeng.guns.api.film.vo.FilmDetailVO;
@@ -10,6 +12,7 @@ import com.stylefeng.guns.rest.common.persistence.dao.MoocFilmInfoTMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MoocActorT;
 import com.stylefeng.guns.rest.common.persistence.model.MoocFilmInfoT;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -20,6 +23,8 @@ import java.util.List;
  * @description: TODO
  * @date 2021/2/18 20:07
  */
+@Component
+@Service(interfaceClass = FilmAsyncServiceApi.class)
 public class DefaultFilmAsyncServiceImpl implements FilmAsyncServiceApi {
 
     @Autowired
