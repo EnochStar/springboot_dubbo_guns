@@ -34,10 +34,10 @@ public class FilmController {
             坏处：
                 一次性获取数据过度，容易出现问题
     */
-    @Reference(interfaceClass = FilmServiceApi.class)
+    @Reference(interfaceClass = FilmServiceApi.class,check = false)
     private FilmServiceApi filmServiceApi;
 
-    @Reference(interfaceClass = FilmAsyncServiceApi.class,async = true)
+    @Reference(interfaceClass = FilmAsyncServiceApi.class,async = true,check = false)
     private FilmAsyncServiceApi filmAsyncServiceApi;
 
     private static final String IMG_PRE = "http://img.meetingshop.cn/";

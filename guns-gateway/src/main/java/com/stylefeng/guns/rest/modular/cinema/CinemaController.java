@@ -65,16 +65,18 @@ public class CinemaController {
     @GetMapping("getFields")
     public ResponseVO getFields(Integer cinemaId) {
         try{
-            CinemaInfoVO cinemaInfoVO = cinemaServiceAPI.getCinemaInfoById(cinemaId);
 
-            List<FilmInfoVO> filmInfoVOList = cinemaServiceAPI.getFilmInfoByCinemaId(cinemaId);
+            CinemaInfoVO cinemaInfoById = cinemaServiceAPI.getCinemaInfoById(cinemaId);
 
-            CinemaFieldsResponseVO cinemaFieldsResponseVO = new CinemaFieldsResponseVO();
-            cinemaFieldsResponseVO.setCinemaInfo(cinemaInfoVO);
-            cinemaFieldsResponseVO.setFilmList(filmInfoVOList);
-            return ResponseVO.success(IMG_PRE,cinemaFieldsResponseVO);
-        }catch (Exception e) {
-            log.error("获取播放场次失败");
+            List<FilmInfoVO> filmInfoByCinemaId = cinemaServiceAPI.getFilmInfoByCinemaId(cinemaId);
+
+            CinemaFieldsResponseVO cinemaFieldResponseVO = new CinemaFieldsResponseVO();
+            cinemaFieldResponseVO.setCinemaInfo(cinemaInfoById);
+            cinemaFieldResponseVO.setFilmList(filmInfoByCinemaId);
+
+            return ResponseVO.success(IMG_PRE,cinemaFieldResponseVO);
+        }catch (Exception e){
+            log.error("获取播放场次失败",e);
             return ResponseVO.serviceFail("获取播放场次失败");
         }
     }
